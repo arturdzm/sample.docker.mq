@@ -1,0 +1,17 @@
+#!/bin/bash
+export TAG=0.0.1
+docker run -v $(pwd)/receiver:/usr/src/receiver -w /usr/src/receiver maven:3.6.3-jdk-8 mvn clean package
+cp receiver/target/receiver.war liberty-receiver
+docker build -t navidsh/mq-sample-receiver:${TAG} ./liberty-receiver
+docker push navidsh/mq-sample-receiver:${TAG}
+oc delete all -l app=mq-sample-receiver
+oc new-app --docker-image navidsh/mq-sample-receiver:${TAG}
+oc expose svc/mq-sample-receiver
+
+oc delete secret mq-receiver-binding
+oc create secret generic mq-receiver-binding --from-env-file=mq.env
+
+# oc delete deployment mq-sample-receiver
+# oc create deployment mq-sample-receiver --image navidsh/mq-sample-receiver:${TAG}
+# oc expose deployment mq-sample-receiver --port 1414
+# oc expose service mq-sample-receiver

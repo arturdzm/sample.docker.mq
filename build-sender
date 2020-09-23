@@ -1,0 +1,18 @@
+#!/bin/bash
+export TAG=0.0.1
+docker run -v $(pwd)/sender:/usr/src/sender -w /usr/src/sender maven:3.6.3-jdk-8 mvn clean package
+cp sender/target/sender.war liberty-sender
+docker build -t navidsh/mq-sample-sender:${TAG} ./liberty-sender
+docker push navidsh/mq-sample-sender:${TAG}
+oc delete all -l app=mq-sample-sender
+oc new-app --docker-image navidsh/mq-sample-sender:${TAG}
+oc expose svc/mq-sample-sender
+
+oc delete secret mq-sender-binding
+oc create secret generic mq-sender-binding --from-env-file=mq.env
+
+# oc delete all -l app=mq-sample-sender
+# oc delete deployment mq-sample-sender
+# oc create deployment mq-sample-sender --image navidsh/mq-sample-sender:${TAG}
+# oc expose deployment mq-sample-sender --port 1414
+# oc expose service mq-sample-sender
