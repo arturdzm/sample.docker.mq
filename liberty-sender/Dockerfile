@@ -1,10 +1,8 @@
 FROM websphere-liberty
 
-MAINTAINER Jamie Coleman <jlcoleman@uk.ibm.com>
+COPY --chown=1001:0 server.xml /config
+COPY --chown=1001:0 sender.war /config/dropins/
+COPY --chown=1001:0 wmq.jmsra-9.2.0.0.rar /config/wmq/
 
-COPY server.xml /opt/ibm/wlp/usr/servers/defaultServer/
-COPY 9.0.0.0-IBM-MQ-Java-InstallRA.jar / 
-COPY sender.war /opt/ibm/wlp/usr/servers/defaultServer/dropins/
-	
-RUN installUtility install --acceptLicense defaultServer
-RUN java -jar 9.0.0.0-IBM-MQ-Java-InstallRA.jar --acceptLicense /
+RUN installUtility install --acceptLicense defaultServer \
+    configure.sh
