@@ -1,0 +1,9 @@
+#!/bin/bash
+source ./set_tag
+K8S_TAG=${TAG//./-}
+oc delete all -l app=mq-sample-receiver-${K8S_TAG}
+oc new-app --docker-image navidsh/mq-sample-receiver:${TAG} --name mq-sample-receiver-${K8S_TAG}
+oc expose svc/mq-sample-receiver-${K8S_TAG}
+
+oc delete secret mq-receiver-binding-${K8S_TAG}
+oc create secret generic mq-receiver-binding-${K8S_TAG} --from-env-file=mq.env
