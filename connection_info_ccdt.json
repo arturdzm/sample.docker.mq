@@ -1,0 +1,17 @@
+{
+ "channel": [
+  {
+   "name": "NOAUTH.CONN",
+   "clientConnection": {
+    "connection": [
+     {
+      "host": "quickstart-cp4i-ibm-mq",
+      "port": 1414
+     }
+    ],
+    "queueManager": "QUICKSTART"
+   },
+   "type": "clientConnection"
+  }
+ ]
+}

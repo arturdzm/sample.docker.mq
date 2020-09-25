@@ -1,0 +1,17 @@
+{
+ "channel": [
+  {
+   "name": "SYSTEM.ADMIN.SVRCONN",
+   "clientConnection": {
+    "connection": [
+     {
+      "host": "mqfull",
+      "port": 1414
+     }
+    ],
+    "queueManager": "QM1"
+   },
+   "type": "clientConnection"
+  }
+ ]
+}

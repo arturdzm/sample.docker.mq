@@ -14,6 +14,7 @@
   <variable name="mq.channel" defaultValue="SYSTEM.ADMIN.SVRCONN"/>
   <variable name="mq.queueManager.name" defaultValue="QM1"/>
   <variable name="mq.queue.name" defaultValue="Q1"/>
+  <variable name="mq.ccdt.url" defaultValue="file:///etc/mq/connection_info_ccdt.json"/>
 
   <httpEndpoint host="*" httpPort="${default.http.port}" httpsPort="${default.https.port}" id="defaultHttpEndpoint"/>
 
@@ -21,11 +22,16 @@
 
 
 	<jmsQueueConnectionFactory jndiName="jms/connectionFactory" connectionManagerRef="ConMgr6">
+		<!-- 		
 		<properties.wmqJms
 			hostName="${mq.host}"
 			port="${mq.port}"
 			channel="${mq.channel}"
-			queueManager="${mq.queueManager.name}"/>
+			queueManager="${mq.queueManager.name}"/> 
+		 -->
+		<properties.wmqJms
+			ccdtURL="${mq.ccdt.url}"
+			queueManager="${mq.queueManager.name}" />
 	</jmsQueueConnectionFactory>
 
 	<jmsQueue id="jms/queue" jndiName="jms/queue">
@@ -35,12 +41,19 @@
 	</jmsQueue>
 
 	<jmsActivationSpec id="receiver/Receiver">
+<!-- 
 		<properties.wmqJms
 			hostName="${mq.host}"
 			destinationRef="jms/queue"
 			destinationType="javax.jms.Queue"
 			port="${mq.port}"
 			channel="${mq.channel}"/>
+-->
+		<properties.wmqJms
+			destinationRef="jms/queue"
+			destinationType="javax.jms.Queue"
+			ccdtURL="${mq.ccdt.url}"
+			queueManager="${mq.queueManager.name}" />
 	</jmsActivationSpec>
 
 	<connectionManager id="ConMgr6" maxPoolSize="2"/>
