@@ -1,0 +1,24 @@
+apiVersion: mq.ibm.com/v1beta1
+kind: QueueManager
+metadata:
+  name: quickstart-cp4i
+spec:
+  pki:
+    keys:
+      - name: default
+        secret:
+          items:
+            - tls.key
+            - tls.crt
+          secretName: mq-tls
+    trust:
+      - name: sender
+        secret:
+          items:
+            - tls.crt
+          secretName: sender-tls-ccdt-certs
+      - name: receiver
+        secret:
+          items:
+            - tls.crt
+          secretName: receiver-tls-ccdt-certs

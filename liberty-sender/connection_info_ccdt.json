@@ -1,15 +1,19 @@
 {
  "channel": [
   {
-   "name": "SYSTEM.ADMIN.SVRCONN",
+   "name": "NOAUTH.CONN",
    "clientConnection": {
     "connection": [
      {
-      "host": "mqfull",
+      "host": "quickstart-cp4i-ibm-mq",
       "port": 1414
      }
     ],
-    "queueManager": "QM1"
+    "queueManager": "QUICKSTART"
+   },
+   "transmissionSecurity":
+   {
+     "cipherSpecification": "ANY_TLS12"
    },
    "type": "clientConnection"
   }

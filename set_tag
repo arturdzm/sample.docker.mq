@@ -1,2 +1,2 @@
 #!/bin/bash
-export TAG=0.0.1-ccdt
+export TAG=0.0.2-ccdt

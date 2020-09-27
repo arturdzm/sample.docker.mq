@@ -1,0 +1,19 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  creationTimestamp: null
+  labels:
+    app: sender-tls-ccdt
+  name: sender-tls-ccdt
+spec:
+  host: sender-tls-ccdt-ibm-mq.ananke-4c666281ea4dfbebe4821a4891d29f22-0000.tor01.containers.appdomain.cloud
+  port:
+    targetPort: 9443
+  to:
+    kind: Service
+    name: sender-tls-ccdt
+    weight: 100
+  tls:
+    termination: reencrypt
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
