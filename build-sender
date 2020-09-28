@@ -1,6 +1,0 @@
-#!/bin/bash
-source ./set_tag
-docker run -v $(pwd)/sender:/usr/src/sender -w /usr/src/sender maven:3.6.3-jdk-8 mvn clean package
-cp sender/target/sender.war liberty-sender
-docker build -t navidsh/mq-sample-sender:${TAG} ./liberty-sender
-docker push navidsh/mq-sample-sender:${TAG}
