@@ -4,10 +4,14 @@ resources:
 - receiver/deployment.yaml
 - receiver/service.yaml
 - receiver/route.yaml
+- receiver/sb.yaml
 
 - sender/deployment.yaml
 - sender/service.yaml
 - sender/route.yaml
+- sender/sb.yaml
+
+- mq-simul.yaml
 
 # patchesStrategicMerge:
 # - qm.yaml
@@ -22,17 +26,17 @@ configMapGenerator:
 - name: sample-receiver-ccdt
   files:
   - ccdt.json
-- name: sample-sender-ccdt
-  files:
-  - ccdt.json
+# - name: sample-sender-ccdt
+#   files:
+#   - ccdt.json
 
 secretGenerator:
 - name: receiver-tls-ccdt-mq
   env: mq.env
   type: Opaque
-- name: sender-tls-ccdt-mq
-  env: mq.env
-  type: Opaque
+# - name: sender-tls-ccdt-mq
+#   env: mq.env
+#   type: Opaque
 
 generatorOptions:
   disableNameSuffixHash: true

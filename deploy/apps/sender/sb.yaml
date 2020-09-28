@@ -1,0 +1,22 @@
+apiVersion: service.binding/v1alpha2
+kind: ServiceBinding
+metadata:
+  name: mq-sender
+spec:
+  application:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: sender-tls-ccdt
+  env:
+    - key: queuemanager.name
+      name: MQ_QUEUEMANAGER_NAME
+    - key: queue.name
+      name: MQ_QUEUE_NAME
+  mappings:
+    - name: MQ_CCDT_URL
+      value: 'file:///bindings/mq-sender/ccdt.json'
+  name: mq-sender
+  service:
+    apiVersion: bindings.labs.vmware.com/v1alpha1
+    kind: ProvisionedService
+    name: mq-service
