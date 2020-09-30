@@ -17,23 +17,15 @@ spec:
         app: receiver-tls-ccdt
     spec:
       volumes:
-        - name: mq-cert-vol
+        - name: tls-vol
           secret:
-            secretName: receiver-tls-ccdt-certs
-        # - name: ccdt
-        #   configMap:
-        #     name: sample-receiver-ccdt
+            secretName: receiver-tls
       containers:
       - image: navidsh/mq-sample-receiver:latest
         name: receiver
         ports:
           - containerPort: 9080
           - containerPort: 9443
-        # envFrom:
-        #   - secretRef:
-        #       name: receiver-tls-ccdt-mq
         volumeMounts:
-          - name: mq-cert-vol
+          - name: tls-vol
             mountPath: /etc/x509/certs
-          # - name: ccdt
-          #   mountPath: /etc/ccdt

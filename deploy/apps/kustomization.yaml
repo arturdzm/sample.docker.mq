@@ -3,7 +3,6 @@ namespace: ibm-mq
 resources:
 - receiver/deployment.yaml
 - receiver/service.yaml
-- receiver/route.yaml
 - receiver/sb.yaml
 
 - sender/deployment.yaml
@@ -13,30 +12,8 @@ resources:
 
 - mq-simul.yaml
 
-# patchesStrategicMerge:
-# - qm.yaml
-
 images:
 - name: navidsh/mq-sample-receiver
   newTag: 0.0.2-ccdt
 - name: navidsh/mq-sample-sender
   newTag: 0.0.2-ccdt
-
-configMapGenerator:
-- name: sample-receiver-ccdt
-  files:
-  - ccdt.json
-# - name: sample-sender-ccdt
-#   files:
-#   - ccdt.json
-
-secretGenerator:
-- name: receiver-tls-ccdt-mq
-  env: mq.env
-  type: Opaque
-# - name: sender-tls-ccdt-mq
-#   env: mq.env
-#   type: Opaque
-
-generatorOptions:
-  disableNameSuffixHash: true

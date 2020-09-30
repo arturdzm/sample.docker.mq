@@ -1,7 +1,6 @@
 namespace: ibm-mq
 
 resources:
-- tls.yaml
 - qm.yaml
 
 configMapGenerator:

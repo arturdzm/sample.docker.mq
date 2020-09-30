@@ -11,27 +11,26 @@ apiVersion: v1
 metadata:
   name: mq-service
 stringData:
-  ccdt.json: |-
-    {
-    "channel": [
-      {
-      "name": "NOAUTH.CONN",
-      "clientConnection": {
-        "connection": [
-        {
-          "host": "quickstart-cp4i-ibm-mq",
-          "port": 1414
-        }
-        ],
-        "queueManager": "QUICKSTART"
-      },
-      "transmissionSecurity":
-      {
-        "cipherSpecification": "ANY_TLS12"
-      },
-      "type": "clientConnection"
-      }
-    ]
-    }
   queue.name: IN.PERSIST
   queuemanager.name: QUICKSTART
+  ccdt.json: |-
+    {
+      "channel": [
+        {
+          "name": "NOAUTH.CONN",
+          "clientConnection": {
+            "connection": [
+              {
+                "host": "quickstart-cp4i-ibm-mq",
+                "port": 1414
+              }
+            ],
+            "queueManager": "QUICKSTART"
+          },
+          "transmissionSecurity": {
+            "cipherSpecification": "ANY_TLS12"
+          },
+          "type": "clientConnection"
+        }
+      ]
+    }
