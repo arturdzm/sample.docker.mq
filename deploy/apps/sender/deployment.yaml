@@ -22,7 +22,7 @@ spec:
             secretName: sender-tls
         - name: mq-service-vol
           secret:
-            secretName: mq-service
+            secretName: mq-ccdt
       containers:
       - image: navidsh/mq-sample-sender:latest
         name: sender
@@ -32,9 +32,10 @@ spec:
         env:
           - name: MQ_CCDT_URL
             value: file:///etc/mq/ccdt.json
-        envFrom:
-          - secretRef:
-              name: mq-service
+          - name: MQ_QUEUE_NAME
+            value: IN.PERSIST
+          - name: MQ_QUEUEMANAGER_NAME
+            value: QUICKSTART
         volumeMounts:
           - name: tls-vol
             mountPath: /etc/x509/certs

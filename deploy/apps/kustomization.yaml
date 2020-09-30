@@ -8,7 +8,7 @@ resources:
 - sender/service.yaml
 - sender/route.yaml
 
-- mq-service.yaml
+- mq-ccdt.yaml
 
 images:
 - name: navidsh/mq-sample-receiver
