@@ -29,3 +29,6 @@ spec:
         volumeMounts:
           - name: tls-vol
             mountPath: /etc/x509/certs
+        envFrom:
+          - secretRef:
+              name: mq-receiver-info

@@ -4,11 +4,13 @@ resources:
 - receiver/deployment.yaml
 - receiver/service.yaml
 - receiver/sb.yaml
+- receiver/mq-info.yaml
 
 - sender/deployment.yaml
 - sender/service.yaml
 - sender/route.yaml
 - sender/sb.yaml
+- sender/mq-info.yaml
 
 - mq-simul.yaml
 

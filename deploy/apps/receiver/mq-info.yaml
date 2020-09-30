@@ -1,0 +1,8 @@
+kind: Secret
+apiVersion: v1
+metadata:
+  name: mq-receiver-info
+stringData:
+  MQ_QUEUE_NAME: IN.PERSIST
+  # MQ_USERNAME: username
+  # MQ_PASSWORD: passw0rd
