@@ -10,6 +10,10 @@ resources:
 
 - mq-ccdt.yaml
 
+# Add .spec.pki.* to the QueueManager for establishing
+# mutual TLS between the apps and the Queue Manager
+- qm-overlay.yaml
+
 images:
 - name: navidsh/mq-sample-receiver
   newTag: 0.0.2-ccdt
