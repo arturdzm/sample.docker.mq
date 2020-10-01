@@ -10,8 +10,8 @@
   <variable name="default.http.port" defaultValue="9080"/>
   <variable name="default.https.port" defaultValue="9443"/>
 
-  <variable name="mq.queueManager.name" defaultValue="IN.PERSIST"/>
-  <variable name="mq.queue.name" defaultValue="QUICKSTART"/>
+  <variable name="mq.queueManager.name" defaultValue="QUICKSTART"/>
+  <variable name="mq.queue.name" defaultValue="IN.PERSIST"/>
   <variable name="mq.ccdt.url" defaultValue="file:///etc/mq/connection_info_ccdt.json"/>
 
   <httpEndpoint host="*" httpPort="${default.http.port}" httpsPort="${default.https.port}" id="defaultHttpEndpoint"/>
