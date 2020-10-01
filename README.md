@@ -68,5 +68,7 @@ This sample is tested on Red Hat OpenShift `v4.4` on IBM Cloud with the followin
 Run the following commands to clean up the applications and the queue manager:
 
 ```console
-$ oc delete -k .
+$ oc delete -k mq/
+
+$ oc delete -k apps/
 ```
