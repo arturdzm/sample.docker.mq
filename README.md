@@ -4,7 +4,7 @@ This files in this project illustrate how IBM MQ Operator can be used to create 
 Queue Manager to communicate between two applications running on WebSphere Liberty. [Service Bindings for Kubernetes](https://github.com/vmware-labs/service-bindings) is used to pass Queue Manager information to the application containers.
 
 The two applications can be built using the `make build-all` and pushed to a Docker
-Registry defined by `REPO_NAME` env variable to using `push-all`.
+Registry defined by `REPO_NAME` env variable to using `make push-all`.
 
 ## Prerequisites
 
