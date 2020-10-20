@@ -1,0 +1,12 @@
+namespace: ibm-mq
+
+resources:
+- qm.yaml
+
+configMapGenerator:
+- name: mqsc-config
+  files:
+  - config.mqsc
+
+generatorOptions:
+  disableNameSuffixHash: true

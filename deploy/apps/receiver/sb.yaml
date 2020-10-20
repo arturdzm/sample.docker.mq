@@ -1,0 +1,24 @@
+apiVersion: service.binding/v1alpha2
+kind: ServiceBinding
+metadata:
+  name: mq-receiver
+spec:
+  name: mq
+  application:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: receiver-tls-ccdt
+  service:
+    apiVersion: bindings.labs.vmware.com/v1alpha1
+    kind: ProvisionedService
+    name: mq-service
+  mappings:
+    - name: ccdt.url
+      value: 'file:///bindings/mq/ccdt.json'
+  # Once Liberty adds support for reading config variables from mounted files,
+  # the following `env` section can be removed.
+  env:
+    - key: queueManager
+      name: MQ_QUEUEMANAGER_NAME
+    - key: ccdt.url
+      name: MQ_CCDT_URL

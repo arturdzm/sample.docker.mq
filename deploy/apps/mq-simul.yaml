@@ -1,0 +1,37 @@
+apiVersion: bindings.labs.vmware.com/v1alpha1
+kind: ProvisionedService
+metadata:
+  name: mq-service
+spec:
+  binding:
+    name: mq-service
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: mq-service
+stringData:
+  host: quickstart-cp4i-ibm-mq
+  port: '1414'
+  queueManager: QUICKSTART
+  ccdt.json: |-
+    {
+      "channel": [
+        {
+          "name": "NOAUTH.CONN",
+          "clientConnection": {
+            "connection": [
+              {
+                "host": "quickstart-cp4i-ibm-mq",
+                "port": 1414
+              }
+            ],
+            "queueManager": "QUICKSTART"
+          },
+          "transmissionSecurity": {
+            "cipherSpecification": "ANY_TLS12"
+          },
+          "type": "clientConnection"
+        }
+      ]
+    }

@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: receiver-tls-ccdt
+  name: receiver-tls-ccdt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: receiver-tls-ccdt
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: receiver-tls-ccdt
+    spec:
+      volumes:
+        - name: tls-vol
+          secret:
+            secretName: receiver-tls
+      containers:
+      - image: navidsh/mq-sample-receiver:latest
+        name: receiver
+        ports:
+          - containerPort: 9080
+          - containerPort: 9443
+        volumeMounts:
+          - name: tls-vol
+            mountPath: /etc/x509/certs
+        envFrom:
+          - secretRef:
+              name: mq-receiver-info

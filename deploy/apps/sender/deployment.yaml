@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: sender-tls-ccdt
+  name: sender-tls-ccdt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sender-tls-ccdt
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: sender-tls-ccdt
+    spec:
+      volumes:
+        - name: tls-vol
+          secret:
+            secretName: sender-tls
+      containers:
+      - image: navidsh/mq-sample-sender:latest
+        name: sender
+        ports:
+          - containerPort: 9080
+          - containerPort: 9443
+        volumeMounts:
+          - name: tls-vol
+            mountPath: /etc/x509/certs
+        envFrom:
+          - secretRef:
+              name: mq-sender-info

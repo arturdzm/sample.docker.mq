@@ -1,0 +1,48 @@
+apiVersion: mq.ibm.com/v1beta1
+kind: QueueManager
+metadata:
+  name: quickstart-cp4i
+spec:
+  license:
+    accept: true
+    license: L-RJON-BN7PN3
+    use: NonProduction
+  queueManager:
+    name: QUICKSTART
+    storage:
+      queueManager:
+        type: ephemeral
+    mqsc:
+      - configMap:
+          items:
+            - config.mqsc
+          name: mqsc-config
+  template:
+    pod:
+      containers:
+        - env:
+            - name: MQSNOAUT
+              value: 'yes'
+          name: qmgr
+  version: 9.2.0.0-r1
+  web:
+    enabled: true
+  pki:
+    keys:
+      - name: default
+        secret:
+          items:
+            - tls.key
+            - tls.crt
+          secretName: mq-tls
+    trust:
+      - name: sender
+        secret:
+          items:
+            - tls.crt
+          secretName: sender-tls
+      - name: receiver
+        secret:
+          items:
+            - tls.crt
+          secretName: receiver-tls
